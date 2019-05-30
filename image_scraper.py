@@ -1,5 +1,6 @@
 import scrapy
 import urllib.request
+import csv
 
 class ImageSpider(scrapy.Spider):
     name = "image_spider"
