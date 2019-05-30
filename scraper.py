@@ -14,3 +14,7 @@ class BrickSetSpider(scrapy.Spider):
                 "minifigs": brickset.xpath(".//div[@class=\"meta\"]/div[@class=\"col\"]/dl[dt/text()=\"Minifigs\"]/dd[2]/a/text()").extract_first(),
                 "image": brickset.xpath("//img/@src").extract_first()
             }
+        
+        next_page = response.css(".next a ::attr(href)").extract_first()
+        if(next_page):
+            yield scrapy.Request(response.urljoin(next_page), callback=self.parse)
